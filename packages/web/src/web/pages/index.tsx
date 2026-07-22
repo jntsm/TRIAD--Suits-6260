@@ -19,7 +19,7 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          Ecossistema de produtividade
+          Geometric · Minimal
         </motion.span>
 
         <h1 className="font-display text-[clamp(3rem,9vw,7.5rem)] font-extrabold leading-[0.95] tracking-tight-display text-ink">
@@ -126,7 +126,10 @@ function AppTile({ id, index, name, role, headline, tagline, points, tone, mark,
             </div>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className={`font-display text-[clamp(2.75rem,6vw,4.5rem)] font-extrabold leading-[0.98] tracking-tight-display ${textMain}`}>
+            <h2
+              className={`font-display text-[clamp(2.4rem,5.5vw,4rem)] font-extrabold leading-[0.98] ${textMain}`}
+              style={{ letterSpacing: "0.14em" }}
+            >
               {name}
             </h2>
           </Reveal>
@@ -201,15 +204,35 @@ function About() {
 
         <div className="mt-20 grid gap-px overflow-hidden rounded-2xl border border-[var(--su-line-dark)] bg-[var(--su-line-dark)] sm:grid-cols-3">
           {[
-            { s: "circle" as const, k: "Radian", v: "Tempo contínuo. O círculo que mede seu foco." },
-            { s: "square" as const, k: "Quadra", v: "Blocos discretos. O quadrado que organiza tarefas." },
-            { s: "triangle" as const, k: "Prisma", v: "Decomposição. O prisma que separa dias e valores." },
+            {
+              s: "circle" as const,
+              k: "Radian",
+              tag: "Timer · Foco",
+              v: "O círculo do tempo contínuo. Sessões de foco, pausas e streaks que transformam concentração em progresso visível.",
+            },
+            {
+              s: "square" as const,
+              k: "Quadra",
+              tag: "To-do · Tarefas",
+              v: "O quadrado dos blocos. Tarefas com subtarefas e tags, num limite intencional para você terminar o que importa.",
+            },
+            {
+              s: "triangle" as const,
+              k: "Prisma",
+              tag: "Calendário · Orçamento",
+              v: "O prisma que decompõe. Calendário e orçamento juntos, separando seu tempo em dias e seu dinheiro em categorias.",
+            },
           ].map((c, i) => (
             <Reveal key={c.k} delay={0.1 * i} className="bg-ink-soft">
-              <div className="flex h-full flex-col items-center gap-5 p-10 text-center">
+              <div className="flex h-full flex-col items-center gap-4 p-10 text-center">
                 <MiniMark shape={c.s} size={30} color="#fafaf8" />
-                <span className="font-display text-xl font-bold">{c.k}</span>
-                <span className="text-[15px] leading-relaxed text-[var(--su-muted-dark)]">{c.v}</span>
+                <span className="font-display text-xl font-bold" style={{ letterSpacing: "0.08em" }}>
+                  {c.k}
+                </span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--su-muted-dark)]">
+                  {c.tag}
+                </span>
+                <span className="mt-1 text-[15px] leading-relaxed text-[var(--su-muted-dark)]">{c.v}</span>
               </div>
             </Reveal>
           ))}
@@ -380,8 +403,8 @@ function Index() {
           index="01"
           role="Timer · Foco"
           name="RADIAN"
-          headline="O tempo, medido em círculos."
-          tagline="Um timer de foco que transforma minutos em progresso. Sessões limpas, sem distração — só você e o próximo ciclo."
+          headline="Foco medido em círculos."
+          tagline="Radian transforma seu tempo em ciclos de foco. Inicie uma sessão, deixe o círculo se fechar e veja a concentração virar progresso — com histórico, streaks e estatísticas que mostram sua evolução dia após dia. Sem ruído: só você e o próximo ciclo."
           points={["Sessões de foco e pausas", "Histórico e streaks", "Estatísticas de tempo"]}
           tone="light"
           mark={<RadianMark color="#0a0a0a" />}
@@ -393,7 +416,7 @@ function Index() {
           role="To-do · Tarefas"
           name="QUADRA"
           headline="O essencial, em blocos."
-          tagline="Uma lista de tarefas que respeita seus limites. Poucas tarefas por vez, subtarefas e tags — foco no que importa agora."
+          tagline="Quadra é uma lista de tarefas que respeita seus limites. Poucas tarefas por vez, cada uma com até três subtarefas e tags pessoais para separar trabalho, estudo e vida. Um quadrado por foco, um foco por vez — para você terminar o que começa."
           points={["Tarefas com subtarefas", "Tags pessoais", "Limite intencional por dia"]}
           tone="dark"
           mark={<QuadraMark color="#fafaf8" />}
@@ -406,7 +429,7 @@ function Index() {
           role="Calendário · Orçamento"
           name="PRISMA"
           headline="Um feixe que se decompõe."
-          tagline="Calendário e orçamento na mesma superfície. Seu tempo e seu dinheiro separados em partes claras — como a luz num prisma."
+          tagline="Prisma reúne calendário e orçamento na mesma superfície. Como a luz atravessando um prisma, ele separa seu tempo em dias e seu dinheiro em categorias — eventos, metas e fluxo de caixa em uma visão só. Enxergue para onde vão seu tempo e seu dinheiro."
           points={["Calendário e eventos", "Controle de orçamento", "Categorias e visão de fluxo"]}
           tone="parchment"
           mark={<PrismaMark color="#0a0a0a" />}
