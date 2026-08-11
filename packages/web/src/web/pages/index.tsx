@@ -53,10 +53,10 @@ function Hero() {
           transition={{ duration: 0.7, delay: 0.75 }}
         >
           <a
-            href="#radian"
+            href="/app"
             className="group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-[15px] font-medium text-paper transition-transform active:scale-[0.96]"
           >
-            Conhecer os apps
+            Abrir o TRIAD
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
           </a>
           <a
@@ -156,13 +156,13 @@ function AppTile({ id, index, name, role, headline, tagline, points, tone, mark,
           <Reveal delay={0.25}>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <a
-                href="#"
+                href="/app"
                 className={`inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[15px] font-medium transition-transform active:scale-[0.96] ${btnPrimary}`}
               >
                 Abrir app
               </a>
               <span className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.2em] ${btnGhost}`}>
-                PWA · Em breve
+                PWA · Instalável
               </span>
             </div>
           </Reveal>

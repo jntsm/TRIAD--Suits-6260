@@ -195,3 +195,183 @@
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ========================================================================== */
+/* TRIAD APP — themed tokens. Dark mode flips these; components must ONLY use  */
+/* var(--t-*) for color, never a fixed hex (that was the old dark-mode bug).   */
+/* ========================================================================== */
+
+:root,
+[data-triad-theme="light"] {
+  --t-ink: #0a0a0a;
+  --t-paper: #fafaf8;
+  --t-paper-2: #f2f1ec;
+  --t-surface: #ffffff;
+  --t-line: rgba(10, 10, 10, 0.12);
+  --t-line-soft: rgba(10, 10, 10, 0.07);
+  --t-muted: #6b6b6b;
+  --t-on-ink: #fafaf8;
+}
+
+[data-triad-theme="dark"] {
+  --t-ink: #f4f4f1;
+  --t-paper: #0a0a0a;
+  --t-paper-2: #141414;
+  --t-surface: #161616;
+  --t-line: rgba(255, 255, 255, 0.16);
+  --t-line-soft: rgba(255, 255, 255, 0.09);
+  --t-muted: #a0a0a0;
+  --t-on-ink: #0a0a0a;
+}
+
+.triad-root {
+  background: var(--t-paper);
+  color: var(--t-ink);
+  min-height: 100dvh;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.triad-mono {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--t-muted);
+}
+
+.triad-display {
+  font-family: var(--font-display, "Montserrat", sans-serif);
+  letter-spacing: -0.02em;
+  color: var(--t-ink);
+}
+
+.triad-wordmark {
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-weight: 700;
+  color: var(--t-ink);
+}
+
+.triad-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--t-line);
+  padding: 10px 2px;
+  font-size: 16px;
+  color: var(--t-ink);
+  outline: none;
+  border-radius: 0;
+  transition: border-color 0.2s ease;
+}
+.triad-input::placeholder {
+  color: var(--t-muted);
+  opacity: 0.75;
+}
+.triad-input:focus {
+  border-bottom-color: var(--t-ink);
+}
+
+.triad-btn {
+  min-height: 46px;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-family: var(--font-mono, "JetBrains Mono", monospace);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    transform 0.12s ease,
+    opacity 0.2s ease,
+    border-color 0.2s ease;
+}
+.triad-btn:active {
+  transform: scale(0.97);
+}
+.triad-btn-primary {
+  background: var(--t-ink);
+  color: var(--t-on-ink);
+}
+.triad-btn-ghost {
+  background: transparent;
+  color: var(--t-ink);
+  border-color: var(--t-line);
+}
+.triad-btn-ghost:hover {
+  border-color: var(--t-ink);
+}
+
+.triad-card {
+  background: var(--t-surface);
+  border: 1px solid var(--t-line);
+  border-radius: 14px;
+  transition: border-color 0.2s ease;
+}
+.triad-card:hover {
+  border-color: var(--t-ink);
+}
+
+.triad-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: color-mix(in srgb, var(--t-paper) 88%, transparent);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--t-line);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  z-index: 40;
+}
+
+.triad-scroll {
+  padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+}
+
+.triad-sheet {
+  position: fixed;
+  z-index: 60;
+  background: var(--t-paper);
+  border: 1px solid var(--t-line);
+  display: flex;
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .triad-sheet {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(440px, 100vw);
+  }
+}
+@media (max-width: 767px) {
+  .triad-sheet {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-height: 88dvh;
+    border-radius: 18px 18px 0 0;
+  }
+}
+
+/* footer sits OUTSIDE the scroll area so the save button can never overlap an
+   input — this fixes the old "button on top of the field" bug */
+.triad-sheet-body {
+  overflow-y: auto;
+  flex: 1;
+  -webkit-overflow-scrolling: touch;
+}
+.triad-sheet-footer {
+  border-top: 1px solid var(--t-line);
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom, 0px));
+  background: var(--t-paper);
+  display: flex;
+  gap: 10px;
+}
