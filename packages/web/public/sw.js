@@ -1,10 +1,24 @@
 /* TRIAD service worker — offline shell */
-const CACHE = "triad-v1";
-const SHELL = ["/", "/app", "/manifest.webmanifest", "/favicon.ico"];
+const CACHE = "triad-v3";
+/* __PRECACHE_START__ */
+const BUILD_ASSETS = [];
+/* __PRECACHE_END__ */
+const SHELL = ["/", "/app", "/manifest.webmanifest", "/favicon.ico", "/favicon.svg", "/apple-touch-icon.png"].concat(
+  BUILD_ASSETS
+);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(SHELL)).then(() => self.skipWaiting())
+    caches
+      .open(CACHE)
+      .then((cache) =>
+        Promise.all(
+          SHELL.map((url) =>
+            cache.add(new Request(url, { cache: "reload" })).catch(function () {})
+          )
+        )
+      )
+      .then(() => self.skipWaiting())
   );
 });
 

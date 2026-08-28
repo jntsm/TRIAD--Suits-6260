@@ -131,7 +131,7 @@ export function PrismaModule() {
 						>
 							‹
 						</button>
-						<span className="triad-display text-lg font-bold capitalize">
+						<span className="triad-display text-lg font-bold first-letter:uppercase">
 							{cursor.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
 						</span>
 						<button

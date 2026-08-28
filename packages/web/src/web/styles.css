@@ -375,3 +375,13 @@
   display: flex;
   gap: 10px;
 }
+
+/* the floating "Made with Runable" badge is fixed at bottom-right and was
+   covering the Tempo/Ajustes tabs of the bottom nav on mobile — lift it above
+   the nav while the app shell is mounted (landing page is unaffected) */
+body[data-triad-app] a[href^="https://runable.com"] {
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px)) !important;
+}
+body[data-triad-app] .triad-scroll {
+  padding-bottom: calc(148px + env(safe-area-inset-bottom, 0px));
+}

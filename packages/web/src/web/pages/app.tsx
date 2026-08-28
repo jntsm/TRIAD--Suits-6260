@@ -33,6 +33,13 @@ export default function AppPage() {
 		setReady(true);
 	}, []);
 
+	// marks the document while the app shell is mounted, so global overlays
+	// (e.g. the floating badge) can be lifted above the fixed bottom nav
+	useEffect(() => {
+		document.body.setAttribute("data-triad-app", "");
+		return () => document.body.removeAttribute("data-triad-app");
+	}, []);
+
 	const { user, onboarded, modules } = state;
 
 	// pick the first active module as the default tab
