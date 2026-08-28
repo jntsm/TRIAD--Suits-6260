@@ -27,9 +27,25 @@ export const base = os.$context<RpcContext>();
 
 /** Assembles the HTTP mount: CORS → /api/health → oRPC procedures at /api/rpc/*. */
 export function createApp(router: Router<Record<never, never>, RpcContext>) {
+  const configuredOrigins = (process.env.CORS_ORIGINS ?? "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+  const defaultOrigins = [
+    process.env.WEBSITE_URL,
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+  ].filter(Boolean) as string[];
+  const allowedOrigins = new Set([...defaultOrigins, ...configuredOrigins]);
+
   const app = new Hono().use(
     cors({
-      origin: (origin) => origin ?? "*",
+      origin: (origin) => {
+        if (!origin) return undefined;
+        return allowedOrigins.has(origin) ? origin : undefined;
+      },
       credentials: true,
       // Required so the browser can read the bearer token header set by Better Auth.
       exposeHeaders: ["set-auth-token"],
